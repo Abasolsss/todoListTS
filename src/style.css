@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #f8f8ff;
+  display: flex;
+  justify-content: center;
+  color: #646681;
+}
+.container {
+  text-align: center;
+  width: 50%;
+  font-family: "REM", sans-serif;
+  margin: 0.625rem;
+}
+.task,
+.taskMain {
+  display: flex;
+  justify-content: space-between;
+  font-family: "REM", sans-serif;
+}
+.addTask button,
+.sortTask button,
+.newTaskActions button {
+  background-color: #6370f0;
+  color: #ffffff;
+  border: none;
+  padding-block: 0.625rem;
+  padding-inline: 1rem;
+  border-radius: 0.62rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.taskShower {
+  background-color: #ecedf6;
+  border-radius: 0.625rem;
+  margin: 0.625rem;
+  padding: 1rem;
+}
+
+.task {
+  background-color: #ffffff;
+  padding-block: 0.9rem;
+  padding-inline: 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.taskActions span {
+  background-color: #eeeeee;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.newTask {
+  width: 50%;
+  height: 1rem;
+  padding: 0.5rem;
+}
+
+.modal {
+  border: 1px solid #ffffff;
+  width: 50%;
+  text-align: center;
+  padding: 2rem;
+  background-color: #f8f8ff;
+  color: #6370f0;
+  border-radius: 1rem;
+}
+
+.newTaskActions {
+  margin: 0.625rem;
+}
+
+.modalBody {
+  display: none;
+}
+
+.modalBodyShow {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: "REM", sans-serif;
+}
