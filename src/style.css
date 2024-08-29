@@ -5,7 +5,8 @@
   margin: 0;
 }
 body {
-  background-color: #f8f8ff;
+  /* background-color: #f8f8ff; */
+  background-color: #1b1b1b;
   display: flex;
   justify-content: center;
   color: #646681;
@@ -21,6 +22,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-family: "REM", sans-serif;
+  margin-block: 0.625rem;
 }
 .addTask button,
 .sortTask button,
@@ -39,7 +41,8 @@ body {
   background-color: #ecedf6;
   border-radius: 0.625rem;
   margin: 0.625rem;
-  padding: 1rem;
+  /* padding: 1rem; */
+  /* visibility: hidden; */
 }
 
 .task {
@@ -54,6 +57,7 @@ body {
   padding: 0.625rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  margin-inline: 0.2rem;
 }
 
 .newTask {
@@ -91,4 +95,11 @@ body {
   justify-content: center;
   color: #ffffff;
   font-family: "REM", sans-serif;
+}
+
+.taskDetails {
+  display: block;
+}
+.taskHandler h5 {
+  text-align: start;
 }
