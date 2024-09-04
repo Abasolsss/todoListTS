@@ -107,18 +107,31 @@ if (inputValue) {
   });
 }
 
-// const interval = setInterval(() => {
-//   const test: HTMLSpanElement | null = document.getElementById("editTask");
+const observer = new MutationObserver((mutations) => {
+  console.log(mutations);
+  const testNode: Node | null = mutations[0].addedNodes[0].childNodes[1];
+  const testDiv = testNode as HTMLDivElement;
+  actionFunction(testDiv);
+});
 
-//   if (test) {
-//     test?.addEventListener("click", () => {
-//       console.log("Hello world");
-//     });
-//     clearInterval(interval);
-//   }
-// }, 100);
+const actionFunction = (test: HTMLDivElement) => {
+  const actionBtns = test.childNodes;
+  const deleteBtn = actionBtns[0];
+  const editBtn = actionBtns[1];
 
-// const editBtn: HTMLSpanElement | null = document.getElementById("editTask");
+  deleteBtn.addEventListener("click", () => {
+    console.log("This is delete");
+  });
+
+  editBtn.addEventListener("click", () => {
+    console.log("This is edit");
+  });
+};
+
+observer.observe(taskHandler!, {
+  childList: true,
+  subtree: true,
+});
 
 modalBtn?.addEventListener("click", () => {
   modalBody?.classList.add("modalBodyShow");
