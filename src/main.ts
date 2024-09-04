@@ -54,13 +54,37 @@ if (inputValue) {
 
     const taskDate: Date = new Date();
     const taskMins: number = taskDate.getMinutes();
-    const taskHour: number = taskDate.getHours();
+    const newTaskMins: number | string = `${
+      taskMins < 10 ? "0" : ""
+    }${taskMins}`;
+    let taskHourMilitary: number = taskDate.getHours();
     const taskMonth: number = taskDate.getMonth() + 1;
     const taskDates: number = taskDate.getDate();
     const taskYear: number = taskDate.getFullYear();
 
+    //convert to civilian hour
+    let taskCivilianHour: number = taskHourMilitary % 12;
+
+    // how to determine if its AM or PM
+    // >= 13 pm
+    // <= 12 am
+    // <= 12 AM : PM
+
+    console.log(taskHourMilitary);
+    console.log(taskCivilianHour);
+
+    const test: number =
+      taskCivilianHour == 12 || taskHourMilitary == 0 ? 12 : taskCivilianHour;
+
+    // to check am or pm
+    const amPm: string =
+      taskCivilianHour >= taskHourMilitary || taskHourMilitary == 0
+        ? "AM"
+        : "PM";
+
     const taskDateVal: HTMLElement = document.createElement("h5");
-    taskDateVal.textContent = `Task Created on ${taskHour}:${taskMins} ${taskMonth}/${taskDates}/${taskYear}`;
+
+    taskDateVal.textContent = `Task Created on ${test}:${newTaskMins} ${amPm} ${taskMonth}/${taskDates}/${taskYear}`;
 
     const taskDateDiv: HTMLDivElement | null = divsArray[4];
     taskDateDiv.classList.add("taskDate");
@@ -83,16 +107,18 @@ if (inputValue) {
   });
 }
 
-const interval = setInterval(() => {
-  const test: HTMLSpanElement | null = document.getElementById("editTask");
+// const interval = setInterval(() => {
+//   const test: HTMLSpanElement | null = document.getElementById("editTask");
 
-  if (test) {
-    test?.addEventListener("click", () => {
-      console.log("Hello world");
-    });
-    clearInterval(interval);
-  }
-}, 100);
+//   if (test) {
+//     test?.addEventListener("click", () => {
+//       console.log("Hello world");
+//     });
+//     clearInterval(interval);
+//   }
+// }, 100);
+
+// const editBtn: HTMLSpanElement | null = document.getElementById("editTask");
 
 modalBtn?.addEventListener("click", () => {
   modalBody?.classList.add("modalBodyShow");
