@@ -103,3 +103,22 @@ body {
 .taskHandler h5 {
   text-align: start;
 }
+
+.handler {
+  position: absolute;
+  background-color: rgb(89, 23, 151);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.test {
+  display: none;
+}
+
+.editTaskModalShow {
+  display: block;
+}

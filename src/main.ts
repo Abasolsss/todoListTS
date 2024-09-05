@@ -9,8 +9,9 @@ const inputValue: HTMLInputElement | null = document.querySelector(".textTask");
 
 const addTaskBtn: HTMLButtonElement | null = document.querySelector(".newTask");
 
-const taskHandler: HTMLDivElement | null =
-  document.querySelector(".taskHandler");
+let taskHandler: HTMLDivElement | null = document.querySelector(".taskHandler");
+
+let taskArray: HTMLDivElement[] = [];
 
 if (inputValue) {
   addTaskBtn?.addEventListener("click", () => {
@@ -102,16 +103,45 @@ if (inputValue) {
     taskHandler?.appendChild(taskDiv);
     taskDetails.appendChild(taskDateDiv);
 
+    // taskArray.push(store!);
+    // console.log(taskArray);
     modalBody?.classList.remove("modalBodyShow");
     inputValue.value = "";
   });
 }
 
 const observer = new MutationObserver((mutations) => {
+  // Log the mutations to inspect their structure
   console.log(mutations);
-  const testNode: Node | null = mutations[0].addedNodes[0].childNodes[1];
-  const testDiv = testNode as HTMLDivElement;
-  actionFunction(testDiv);
+
+  // Check if the first mutation and its addedNodes exist
+  if (mutations.length > 0 && mutations[0].addedNodes.length > 0) {
+    // Safely access the first added node
+    const firstAddedNode = mutations[0].addedNodes[0];
+
+    // Check if firstAddedNode and its childNodes exist and have the expected structure
+    if (firstAddedNode && firstAddedNode.childNodes.length > 1) {
+      // Safely access the second child node
+      const testNode = firstAddedNode.childNodes[1] as Node | null;
+
+      // Log the testNode to ensure it’s correctly accessed
+      // console.log(testNode);
+
+      // Ensure that testNode is an HTMLDivElement before using it
+      if (testNode instanceof HTMLDivElement) {
+        // Now it's safe to use testNode as an HTMLDivElement
+        actionFunction(testNode);
+      } else {
+        console.error("The node is not an HTMLDivElement:", testNode);
+      }
+    } else {
+      console.error(
+        "firstAddedNode or its childNodes are not structured as expected."
+      );
+    }
+  } else {
+    console.error("Mutations array is empty or no nodes were added.");
+  }
 });
 
 const actionFunction = (test: HTMLDivElement) => {
@@ -119,12 +149,35 @@ const actionFunction = (test: HTMLDivElement) => {
   const deleteBtn = actionBtns[0];
   const editBtn = actionBtns[1];
 
-  deleteBtn.addEventListener("click", () => {
-    console.log("This is delete");
+  deleteBtn.addEventListener("click", (event: Event) => {
+    const target = event.target as HTMLElement;
+    const parent = target.parentElement?.parentElement;
+    parent?.remove();
   });
 
-  editBtn.addEventListener("click", () => {
-    console.log("This is edit");
+  const editModal = document.querySelector<HTMLDivElement>(".handler");
+
+  const cancelEdit = document.querySelector<HTMLButtonElement>(".cancelEdit");
+
+  const editTasks: HTMLInputElement | null =
+    document.querySelector(".editTasks");
+
+  editBtn.addEventListener("click", (event: Event) => {
+    editModal?.classList.add("editTaskModalShow");
+
+    const test = event.target as HTMLElement;
+
+    const value =
+      test.parentElement?.parentElement?.childNodes[0].childNodes[0]
+        .childNodes[0].textContent;
+
+    if (editTasks) {
+      editTasks.value = value ?? "";
+    }
+  });
+
+  cancelEdit?.addEventListener("click", () => {
+    editModal?.classList.remove("editTaskModalShow");
   });
 };
 
