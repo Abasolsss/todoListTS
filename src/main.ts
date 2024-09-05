@@ -20,104 +20,112 @@ let taskHandler: HTMLDivElement | null = document.querySelector(".taskHandler");
 // let taskArray: HTMLDivElement[] = [];
 
 //create task
-let tests: string;
-if (inputValue) {
-  addTaskBtn?.addEventListener("click", () => {
-    const divsArray: HTMLDivElement[] = [];
-    const spansArray: HTMLSpanElement[] = [];
 
-    for (let i = 0; i < 6; i++) {
-      const divs = document.createElement("div");
-      divsArray.push(divs);
-    }
+let arr: HTMLElement[] = [];
+const taskFunction = () => {
+  if (inputValue) {
+    addTaskBtn?.addEventListener("click", () => {
+      const divsArray: HTMLDivElement[] = [];
+      const spansArray: HTMLSpanElement[] = [];
 
-    for (let i = 0; i < 2; i++) {
-      const spans = document.createElement("span");
-      spansArray.push(spans);
-    }
+      for (let i = 0; i < 6; i++) {
+        const divs = document.createElement("div");
+        divsArray.push(divs);
+      }
 
-    const taskDiv: HTMLDivElement | null = divsArray[0];
-    taskDiv.classList.add("task");
+      for (let i = 0; i < 2; i++) {
+        const spans = document.createElement("span");
+        spansArray.push(spans);
+      }
 
-    const taskDetails: HTMLDivElement | null = divsArray[1];
-    taskDetails.classList.add("taskDetails");
+      const taskDiv: HTMLDivElement | null = divsArray[0];
+      taskDiv.classList.add("task");
 
-    const taskName: HTMLDivElement | null = divsArray[2];
-    taskName.classList.add("taskName");
+      const taskDetails: HTMLDivElement | null = divsArray[1];
+      taskDetails.classList.add("taskDetails");
 
-    //task text
-    let taskValue = document.createElement("h5");
-    tests = taskValue.textContent = inputValue.value;
+      const taskName: HTMLDivElement | null = divsArray[2];
+      taskName.classList.add("taskName");
 
-    const taskActions: HTMLDivElement = divsArray[3];
-    taskActions.classList.add("taskActions");
+      //task text
+      let taskValue = document.createElement("h5");
+      taskValue.textContent = inputValue.value;
 
-    const spanDelete: HTMLSpanElement = spansArray[0];
-    spanDelete.classList.add("material-symbols-outlined");
-    spanDelete.setAttribute("id", "deleteTask");
-    spanDelete.textContent = "delete";
+      arr.push(taskValue, taskDetails, taskName, taskDiv);
 
-    const spanEdit: HTMLSpanElement = spansArray[1];
-    spanEdit.classList.add("material-symbols-outlined");
-    spanEdit.setAttribute("id", "editTask");
-    spanEdit.textContent = "edit";
+      const taskActions: HTMLDivElement = divsArray[3];
+      taskActions.classList.add("taskActions");
 
-    const taskDate: Date = new Date();
-    const taskMins: number = taskDate.getMinutes();
-    const newTaskMins: number | string = `${
-      taskMins < 10 ? "0" : ""
-    }${taskMins}`;
-    let taskHourMilitary: number = taskDate.getHours();
-    const taskMonth: number = taskDate.getMonth() + 1;
-    const taskDates: number = taskDate.getDate();
-    const taskYear: number = taskDate.getFullYear();
+      const spanDelete: HTMLSpanElement = spansArray[0];
+      spanDelete.classList.add("material-symbols-outlined");
+      spanDelete.setAttribute("id", "deleteTask");
+      spanDelete.textContent = "delete";
 
-    //convert to civilian hour
-    let taskCivilianHour: number = taskHourMilitary % 12;
+      const spanEdit: HTMLSpanElement = spansArray[1];
+      spanEdit.classList.add("material-symbols-outlined");
+      spanEdit.setAttribute("id", "editTask");
+      spanEdit.textContent = "edit";
 
-    // how to determine if its AM or PM
-    // >= 13 pm
-    // <= 12 am
-    // <= 12 AM : PM
+      const taskDate: Date = new Date();
+      const taskMins: number = taskDate.getMinutes();
+      const newTaskMins: number | string = `${
+        taskMins < 10 ? "0" : ""
+      }${taskMins}`;
+      let taskHourMilitary: number = taskDate.getHours();
+      const taskMonth: number = taskDate.getMonth() + 1;
+      const taskDates: number = taskDate.getDate();
+      const taskYear: number = taskDate.getFullYear();
 
-    console.log(taskHourMilitary);
-    console.log(taskCivilianHour);
+      //convert to civilian hour
+      let taskCivilianHour: number = taskHourMilitary % 12;
 
-    const test: number =
-      taskCivilianHour == 12 || taskHourMilitary == 0 ? 12 : taskCivilianHour;
+      // how to determine if its AM or PM
+      // >= 13 pm
+      // <= 12 am
+      // <= 12 AM : PM
 
-    // to check am or pm
-    const amPm: string =
-      taskCivilianHour >= taskHourMilitary || taskHourMilitary == 0
-        ? "AM"
-        : "PM";
+      console.log(taskHourMilitary);
+      console.log(taskCivilianHour);
 
-    const taskDateVal: HTMLElement = document.createElement("h5");
+      const test: number =
+        taskCivilianHour == 12 || taskHourMilitary == 0 ? 12 : taskCivilianHour;
 
-    taskDateVal.textContent = `Task Created on ${test}:${newTaskMins} ${amPm} ${taskMonth}/${taskDates}/${taskYear}`;
+      // to check am or pm
+      const amPm: string =
+        taskCivilianHour >= taskHourMilitary || taskHourMilitary == 0
+          ? "AM"
+          : "PM";
 
-    const taskDateDiv: HTMLDivElement | null = divsArray[4];
-    taskDateDiv.classList.add("taskDate");
+      const taskDateVal: HTMLElement = document.createElement("h5");
 
-    taskDateDiv.appendChild(taskDateVal);
-    taskActions.appendChild(spanDelete);
-    taskActions.appendChild(spanEdit);
+      taskDateVal.textContent = `Task Created on ${test}:${newTaskMins} ${amPm} ${taskMonth}/${taskDates}/${taskYear}`;
 
-    taskDiv.appendChild(taskDetails);
+      const taskDateDiv: HTMLDivElement | null = divsArray[4];
+      taskDateDiv.classList.add("taskDate");
 
-    taskDiv.appendChild(taskDetails);
-    taskDiv.appendChild(taskActions);
-    taskDetails.appendChild(taskName);
-    taskName.appendChild(taskValue);
-    taskHandler?.appendChild(taskDiv);
-    taskDetails.appendChild(taskDateDiv);
+      taskDateDiv.appendChild(taskDateVal);
+      taskActions.appendChild(spanDelete);
+      taskActions.appendChild(spanEdit);
 
-    // taskArray.push(store!);
-    // console.log(taskArray);
-    modalBody?.classList.remove("modalBodyShow");
-    inputValue.value = "";
-  });
-}
+      taskDiv.appendChild(taskDetails);
+
+      taskDiv.appendChild(taskDetails);
+      taskDiv.appendChild(taskActions);
+      taskDetails.appendChild(taskName);
+      taskName.appendChild(taskValue);
+      taskHandler?.appendChild(taskDiv);
+      taskDetails.appendChild(taskDateDiv);
+
+      // taskArray.push(store!);
+      // console.log(taskArray);
+      modalBody?.classList.remove("modalBodyShow");
+      inputValue.value = "";
+    });
+  }
+  return arr;
+};
+
+taskFunction();
 
 //observing the text value of the input
 
@@ -176,42 +184,42 @@ const actionFunction = (test: HTMLDivElement) => {
     document.querySelector(".editTasks");
 
   //edit task section
+  let editArr: HTMLElement[] = [];
+
   editBtn.addEventListener("click", (event: Event) => {
     editModal?.classList.add("editTaskModalShow");
 
     const test = event.target as HTMLElement;
+    const headerVal = <HTMLElement>(
+      test.parentNode?.parentNode?.childNodes[0].childNodes[0].childNodes[0]
+    );
 
     const value = test.parentElement?.parentElement?.childNodes[0].childNodes[0]
       .childNodes[0].textContent as string;
 
+    console.log(headerVal, "this is value", value);
     if (editTasks) {
       editTasks.value = value;
     }
+    // editArr.push(headerVal);
+    wtfFunc(headerVal, value);
   });
 
-  saveEdit?.addEventListener("click", () => {
-    // let taskValue = document.createElement("h5");
-    // tests = taskValue.textContent = inputValue.value;
-    // const newValue = document.createElement("h5")
-    // newValue.textContent =
-    if (editTasks) {
-      const newValue: string | number = editTasks.value;
-      const newHeader: HTMLElement = document.createElement("h5");
-      newHeader.textContent = newValue;
-
-      const newTaskDiv: HTMLDivElement | null = document.createElement("div");
-      newTaskDiv.classList.add("taskName");
-      newTaskDiv.appendChild(newHeader);
+  const wtfFunc = (editFunct: HTMLElement, oldVal: string) => {
+    saveEdit?.addEventListener("click", (event: Event) => {
+      //get the h5 element to replace
+      const newValue = editTasks?.value as string;
+      const test = (editFunct.textContent = newValue);
+      console.log(test);
 
       editModal?.classList.remove("editTaskModalShow");
+    });
 
-      console.log("hello", newTaskDiv);
-    }
-  });
-
-  cancelEdit?.addEventListener("click", () => {
-    editModal?.classList.remove("editTaskModalShow");
-  });
+    // to cancel the edit window modal
+    cancelEdit?.addEventListener("click", () => {
+      editModal?.classList.remove("editTaskModalShow");
+    });
+  };
 };
 
 observer.observe(taskHandler!, {
