@@ -61,9 +61,10 @@ body {
 }
 
 .newTask {
-  width: 50%;
-  height: 1rem;
+  width: 20%;
+  /* height: 1rem; */
   padding: 0.5rem;
+  height: 100%;
 }
 
 .modal {

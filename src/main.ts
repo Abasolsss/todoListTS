@@ -1,3 +1,9 @@
+/*
+references
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing = null for string
+
+*/
+
 const modalBtn = document.querySelector(".addTask");
 
 const modalBody: HTMLDivElement | null = document.querySelector(".modalBody");
@@ -11,8 +17,10 @@ const addTaskBtn: HTMLButtonElement | null = document.querySelector(".newTask");
 
 let taskHandler: HTMLDivElement | null = document.querySelector(".taskHandler");
 
-let taskArray: HTMLDivElement[] = [];
+// let taskArray: HTMLDivElement[] = [];
 
+//create task
+let tests: string;
 if (inputValue) {
   addTaskBtn?.addEventListener("click", () => {
     const divsArray: HTMLDivElement[] = [];
@@ -37,8 +45,9 @@ if (inputValue) {
     const taskName: HTMLDivElement | null = divsArray[2];
     taskName.classList.add("taskName");
 
-    const taskValue = document.createElement("h5");
-    taskValue.textContent = inputValue.value;
+    //task text
+    let taskValue = document.createElement("h5");
+    tests = taskValue.textContent = inputValue.value;
 
     const taskActions: HTMLDivElement = divsArray[3];
     taskActions.classList.add("taskActions");
@@ -110,9 +119,11 @@ if (inputValue) {
   });
 }
 
+//observing the text value of the input
+
 const observer = new MutationObserver((mutations) => {
   // Log the mutations to inspect their structure
-  console.log(mutations);
+  // console.log(mutations);
 
   // Check if the first mutation and its addedNodes exist
   if (mutations.length > 0 && mutations[0].addedNodes.length > 0) {
@@ -159,20 +170,42 @@ const actionFunction = (test: HTMLDivElement) => {
 
   const cancelEdit = document.querySelector<HTMLButtonElement>(".cancelEdit");
 
+  const saveEdit = document.querySelector<HTMLButtonElement>(".saveEdit");
+
   const editTasks: HTMLInputElement | null =
     document.querySelector(".editTasks");
 
+  //edit task section
   editBtn.addEventListener("click", (event: Event) => {
     editModal?.classList.add("editTaskModalShow");
 
     const test = event.target as HTMLElement;
 
-    const value =
-      test.parentElement?.parentElement?.childNodes[0].childNodes[0]
-        .childNodes[0].textContent;
+    const value = test.parentElement?.parentElement?.childNodes[0].childNodes[0]
+      .childNodes[0].textContent as string;
 
     if (editTasks) {
-      editTasks.value = value ?? "";
+      editTasks.value = value;
+    }
+  });
+
+  saveEdit?.addEventListener("click", () => {
+    // let taskValue = document.createElement("h5");
+    // tests = taskValue.textContent = inputValue.value;
+    // const newValue = document.createElement("h5")
+    // newValue.textContent =
+    if (editTasks) {
+      const newValue: string | number = editTasks.value;
+      const newHeader: HTMLElement = document.createElement("h5");
+      newHeader.textContent = newValue;
+
+      const newTaskDiv: HTMLDivElement | null = document.createElement("div");
+      newTaskDiv.classList.add("taskName");
+      newTaskDiv.appendChild(newHeader);
+
+      editModal?.classList.remove("editTaskModalShow");
+
+      console.log("hello", newTaskDiv);
     }
   });
 
