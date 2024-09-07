@@ -21,13 +21,26 @@ let taskHandler: HTMLDivElement | null = document.querySelector(".taskHandler");
 
 //create task
 
-let arr: HTMLElement[] = [];
+// let inc: number = 0;
+// let arrNumber: number[] = []
+let taskArr: HTMLDivElement[] = [];
 const taskFunction = () => {
   if (inputValue) {
     addTaskBtn?.addEventListener("click", () => {
       const divsArray: HTMLDivElement[] = [];
       const spansArray: HTMLSpanElement[] = [];
+      
 
+      // inc++
+      // for (let i = 0; i < inc; i++) {
+      //   arrNumber.push(i)
+      // }
+
+      // arrNumber.forEach(element => {
+      //   console.log("this is from foreacH",element)
+      // });
+
+      // console.log("This is increment", inc)
       for (let i = 0; i < 6; i++) {
         const divs = document.createElement("div");
         divsArray.push(divs);
@@ -37,7 +50,8 @@ const taskFunction = () => {
         const spans = document.createElement("span");
         spansArray.push(spans);
       }
-
+    
+      //div for the task
       const taskDiv: HTMLDivElement | null = divsArray[0];
       taskDiv.classList.add("task");
 
@@ -51,7 +65,7 @@ const taskFunction = () => {
       let taskValue = document.createElement("h5");
       taskValue.textContent = inputValue.value;
 
-      arr.push(taskValue, taskDetails, taskName, taskDiv);
+      // arr.push(taskValue, taskDetails, taskName, taskDiv);
 
       const taskActions: HTMLDivElement = divsArray[3];
       taskActions.classList.add("taskActions");
@@ -113,16 +127,23 @@ const taskFunction = () => {
       taskDiv.appendChild(taskActions);
       taskDetails.appendChild(taskName);
       taskName.appendChild(taskValue);
-      taskHandler?.appendChild(taskDiv);
+      
       taskDetails.appendChild(taskDateDiv);
-
       // taskArray.push(store!);
       // console.log(taskArray);
+      // taskArr.push(taskDiv)
+      // taskArr.forEach((e) => {
+        
+      //   console.log(e)
+      // })
+      taskHandler?.appendChild(taskDiv);
       modalBody?.classList.remove("modalBodyShow");
       inputValue.value = "";
+      // console.log(taskArr)
     });
+    
   }
-  return arr;
+  return taskArr;
 };
 
 taskFunction();
@@ -187,40 +208,44 @@ const actionFunction = (test: HTMLDivElement) => {
   let editArr: HTMLElement[] = [];
 
   editBtn.addEventListener("click", (event: Event) => {
-    editModal?.classList.add("editTaskModalShow");
+  
+    // const taskFunc: HTMLDivElement[] = taskFunction()
 
-    const test = event.target as HTMLElement;
-    const headerVal = <HTMLElement>(
-      test.parentNode?.parentNode?.childNodes[0].childNodes[0].childNodes[0]
-    );
-
-    const value = test.parentElement?.parentElement?.childNodes[0].childNodes[0]
-      .childNodes[0].textContent as string;
-
-    console.log(headerVal, "this is value", value);
-    if (editTasks) {
-      editTasks.value = value;
+    const tests: HTMLDivElement | null = document.querySelector(".handler")
+    tests?.classList.add("editTaskModalShow");
+    console.log(event)
+    if(tests) {
+      tests.innerHTML = 
+      `
+      <div class="editTaskModal">
+        <h1>Edit taskShower</h1>
+        <input type="text" name="" id="" class="editTasks" />
+        <!-- <input type="text" name="" id="" class="textTask" /> -->
+        <button class="saveEdit">Save</button>
+        <button class="cancelEdit">Cancel</button>
+      </div>
+      `
     }
-    // editArr.push(headerVal);
-    wtfFunc(headerVal, value);
   });
 
-  const wtfFunc = (editFunct: HTMLElement, oldVal: string) => {
+  const wtfFunc = () => {
     saveEdit?.addEventListener("click", (event: Event) => {
-      //get the h5 element to replace
       const newValue = editTasks?.value as string;
-      const test = (editFunct.textContent = newValue);
+      // const test = (editFunct.textContent = newValue);
       console.log(test);
-
       editModal?.classList.remove("editTaskModalShow");
     });
 
     // to cancel the edit window modal
     cancelEdit?.addEventListener("click", () => {
       editModal?.classList.remove("editTaskModalShow");
+
+      
     });
   };
+  wtfFunc();
 };
+
 
 observer.observe(taskHandler!, {
   childList: true,

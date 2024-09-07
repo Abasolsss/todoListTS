@@ -5,8 +5,8 @@
   margin: 0;
 }
 body {
-  /* background-color: #f8f8ff; */
-  background-color: #1b1b1b;
+  background-color: #f8f8ff;
+  /* background-color: #1b1b1b; */
   display: flex;
   justify-content: center;
   color: #646681;
@@ -116,9 +116,11 @@ body {
   display: none;
 }
 
-.test {
+
+
+/* .test {
   display: none;
-}
+} */
 
 .editTaskModalShow {
   display: block;
