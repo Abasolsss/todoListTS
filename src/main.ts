@@ -139,25 +139,26 @@ mutationNewTask.observe(addTask!, {
             const testss = document.body.querySelector(`.${e}`)
             // console.log(testss?.classList[0])
                 if(taskClass == testss?.classList[0]) {
-                    console.log(testss)
+                    const taskValue: string | null = testss.textContent
+                    if(editTask) {
+                        editTask.innerHTML = 
+                        `
+                      <h1>Edit Task</h1>
+                        <div class="container">
+                          <input type="text" value="${taskValue}">
+                          <button class="saveEdit">Save</button>
+                          <button>Cancel</button>
+                        </div>
+                        `
+                        document.querySelector(".saveEdit")?.addEventListener("click", () => {
+                            
+                        })
+                      }
                 } else {
                     console.log(false)
                 }
             })
-          if(editTask) {
-            editTask.innerHTML = 
-            `
-          <h1>Edit Task</h1>
-            <div class="container">
-              <input type="text" value="">
-              <button class="wtf">Save</button>
-              <button>Cancel</button>
-            </div>
-            `
-            document.querySelector(".wtf")?.addEventListener("click", () => {
-                
-            })
-          }
+        
         })
             
         } else {
