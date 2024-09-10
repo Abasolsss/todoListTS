@@ -115,9 +115,10 @@ const mutationTaskHandler = new MutationObserver((mutations) => {
   //for edit modal
   if (editButtonChildNode instanceof HTMLSpanElement) {
     const editButton: HTMLSpanElement = editButtonChildNode;
-
     editButton.addEventListener("click", () => {
-      console.log(taskClass);
+      editTask?.classList.remove("editTask");
+      editTask?.classList.add("editShow");
+      // console.log(taskClass);
       headerArrays.forEach((e) => {
         const oldValue = document.body.querySelector(`.${e}`);
         console.log(oldValue?.classList[0]);
@@ -129,21 +130,31 @@ const mutationTaskHandler = new MutationObserver((mutations) => {
                         <div class="container">
                           <input type="text" value="${taskValue}" id="wtf">
                           <button class="saveEdit">Save</button>
-                          <button>Cancel</button>
+                          <button class="cancelEdit">Cancel</button>
                         </div>
                         `;
-            document
-              .querySelector(".saveEdit")
-              ?.addEventListener("click", () => {
-                const testsss = document.getElementById("wtf");
 
-                if (testsss instanceof HTMLInputElement) {
-                  const newInput: HTMLInputElement = testsss;
-                  oldValue.textContent = newInput.value;
-                } else {
-                  console.log(false);
-                }
-              });
+            const saveEdit: HTMLButtonElement | null =
+              document.querySelector(".saveEdit");
+
+            const cancelButton: HTMLButtonElement | null =
+              document.querySelector(".cancelEdit");
+
+            saveEdit?.addEventListener("click", () => {
+              const testsss = document.getElementById("wtf");
+              if (testsss instanceof HTMLInputElement) {
+                const newInput: HTMLInputElement = testsss;
+                oldValue.textContent = newInput.value;
+                editTask?.classList.add("editTask");
+                editTask?.classList.remove("editShow");
+              } else {
+                console.log(false);
+              }
+            });
+            cancelButton?.addEventListener("click", () => {
+              editTask?.classList.add("editTask");
+              editTask?.classList.remove("editShow");
+            });
           }
         } else {
           console.log(false);

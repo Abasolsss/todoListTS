@@ -1,76 +1,93 @@
-
-
 body {
-    /* background-color: rebeccapurple; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  /* background-color: rebeccapurple; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 header {
-    text-align: center;
+  text-align: center;
 }
 
 .main-container {
-    width: 50em;
-    /* background: yellow; */
+  width: 50em;
+  /* background: yellow; */
 }
 
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
 .button-container button {
-
-    display: inline-block;
-    outline: 0;
-    border: 0;
-    cursor: pointer;
-    transition: box-shadow 0.15s ease,transform 0.15s ease;
-    will-change: box-shadow,transform;
-    background: #FCFCFD;
-    box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
-    height: 48px;
-    padding: 0 32px;
-    font-size: 18px;
-    border-radius: 6px;
-    color: #36395a;
-    transition: box-shadow 0.15s ease,transform 0.15s ease;  
-  }
-
-
- .button-container button:hover {
-    box-shadow: 0px 4px 8px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
-    transform: translateY(-2px);
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  will-change: box-shadow, transform;
+  background: #fcfcfd;
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
+  height: 48px;
+  padding: 0 32px;
+  font-size: 18px;
+  border-radius: 6px;
+  color: #36395a;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
-.button-container button:active{
-    box-shadow: inset 0px 3px 7px #d6d6e7;
-    transform: translateY(2px);
+
+.button-container button:hover {
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
+  transform: translateY(-2px);
+}
+.button-container button:active {
+  box-shadow: inset 0px 3px 7px #d6d6e7;
+  transform: translateY(2px);
 }
 
 .taskShower {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .taskActions span {
-    border: 1px solid black;
-    cursor: pointer;
-    margin: 0.625rem;
-    padding: 0.625rem;
+  border: 1px solid black;
+  cursor: pointer;
+  margin: 0.625rem;
+  padding: 0.625rem;
 }
 
 .taskHandler {
-    display: block;
+  display: block;
 }
 .addTaskHide {
-    display: none;
+  display: none;
 }
 
 .addTaskShow {
-    display: block;
+  display: block;
+  position: absolute;
+  background: yellow;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+
+.editShow {
+  display: block;
+  position: absolute;
+  background: purple;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+.editTask {
+  display: none;
 }
