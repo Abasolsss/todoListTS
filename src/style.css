@@ -1,9 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
 body {
   /* background-color: rebeccapurple; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 100, "YTLC" 500;
+  background-color: #8ec5fc;
+  background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
 }
 header {
   text-align: center;
@@ -53,30 +62,54 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #ffffff;
+  padding-inline: 1rem;
+  margin-block: 0.625rem;
+  border-radius: 0.625rem;
 }
 
 .taskActions span {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   cursor: pointer;
-  margin: 0.625rem;
+  /* margin: 0.625rem; */
   padding: 0.625rem;
+  background-color: #eeeeee;
+  border-radius: 5px;
+}
+.taskActions span:first-child {
+  margin: 0.625rem;
 }
 
 .taskHandler {
   display: block;
+  background-color: #ecedf6;
+  /* padding: 1rem; */
+  margin-block: 0.625rem;
+  border-radius: 0.625rem;
 }
 .addTaskHide {
   display: none;
 }
 
 .addTaskShow {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  background: yellow;
+  background: rgb(102, 102, 81);
   width: 100%;
   height: 100%;
   right: 0;
   top: 0;
+}
+
+.paddingAdd {
+  padding: 1rem;
+}
+.addTaskShow input[type="text"] {
+  margin: 1rem;
+  border: px solid black;
 }
 
 .editShow {
@@ -91,3 +124,20 @@ header {
 .editTask {
   display: none;
 }
+
+.taskMaker {
+  width: 50%;
+  height: 1.25rem;
+  border: none;
+  border-radius: 1rem;
+  padding-inline: 0.625rem;
+  padding-block: 0.8rem;
+}
+
+.divButtons button {
+  background-color: #6370f0;
+}
+/* 
+h5 {
+  font-size: 12px;
+} */
