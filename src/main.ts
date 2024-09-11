@@ -89,6 +89,7 @@ const mutationNewTask = new MutationObserver((mutations) => {
 
       const taskShowerDiv: HTMLDivElement | null = divArray[2];
       taskShowerDiv.classList.add("taskShower");
+      taskShowerDiv.setAttribute("id", `taskNumber${taskNumber}`);
 
       const taskName: HTMLElement | null = headerArray[0];
       taskName.classList.add(`taskNumber${taskNumber}`);
@@ -129,16 +130,29 @@ mutationNewTask.observe(addTask!, {
 
 const mutationTaskHandler = new MutationObserver((mutations) => {
   const editTask: HTMLDivElement | null = document.querySelector(".editTask");
+  const testss = mutations[0].addedNodes[0] as HTMLDivElement;
 
+  const divId = testss.attributes[1].value as string;
   const taskActionsDivs: NodeListOf<ChildNode> =
     mutations[0].addedNodes[0].childNodes;
-
+  console.log(divId);
   const editButtonChildNode = taskActionsDivs[1].childNodes[1];
-
+  const deleteButtonChildNode = taskActionsDivs[1]
+    .childNodes[0] as HTMLSpanElement;
   const taskNode = mutations[0].addedNodes[0].childNodes[0].childNodes[0];
+
   const taskEl: HTMLElement = taskNode as HTMLElement;
   const taskClass: string = taskEl.classList[0];
 
+  deleteButtonChildNode.addEventListener("click", () => {
+    headerArrays.forEach((e) => {
+      const divEl = document.getElementById(`${e}`);
+      const divElString = divEl?.attributes[1].value as string;
+      if (divId === divElString) {
+        divEl?.remove();
+      }
+    });
+  });
   //for edit modal
   if (editButtonChildNode instanceof HTMLSpanElement) {
     const editButton: HTMLSpanElement = editButtonChildNode;
