@@ -4,7 +4,7 @@ const newTask: HTMLElement | null = document.querySelector(".newTask");
 const addTask: HTMLElement | null = document.querySelector(".addTaskDiv");
 
 //handler of each divs
-// const taskShower: HTMLElement | null = document.querySelector(".taskShower")
+
 
 //main handler of the task divs
 const taskHandler: HTMLElement | null = document.querySelector(".taskHandler");
@@ -14,15 +14,12 @@ const taskHandler: HTMLElement | null = document.querySelector(".taskHandler");
 
 //observation for the new task
 
-// const buttonContainer: HTMLDivElement | null =
-//   document.querySelector(".button-container");
-
 newTask?.addEventListener("click", () => {
   addTask?.classList.add("addTaskShow");
   addTask?.classList.remove("addTaskHide");
   if (addTask) {
     addTask.innerHTML = `
-    <h1>Add new task</h1>
+    <h1 class="newTaskHeader">Add new task</h1>
      <input type="text" name="" required id="" class="taskMaker">
      <div class="divButtons">
         <button type="submit" class="addTask">Add new task</button>
@@ -56,7 +53,20 @@ const mutationNewTask = new MutationObserver((mutations) => {
   });
 
   addNewTaskBtn?.addEventListener("click", () => {
+  //get the month,date,hour
+   const taskNewDate:Date = new Date()
+   const taskMonth:number = taskNewDate.getMonth() + 1
+   const taskDate:number = taskNewDate.getDate()
+   const taskYear:number = taskNewDate.getFullYear()
+   const militaryTime: number = taskNewDate.getHours()
+   const civilianTime:number = militaryTime % 12
+   const timeFormat: string = militaryTime <= 12 || militaryTime === 0 ? "AM" : "PM"
+   const taskMinutes: number = taskNewDate.getMinutes()
+  
+    const taskCreated:string = `${civilianTime}:${taskMinutes} ${timeFormat}, ${taskMonth}/${taskDate}/${taskYear}`
+
     taskNumber++;
+    console.log(taskNumber, "added task")
     const testss = document.querySelector(".taskMaker") as HTMLInputElement;
 
     if (testss?.value === "") {
@@ -99,7 +109,7 @@ const mutationNewTask = new MutationObserver((mutations) => {
       headerArrays.push(headerClass);
 
       const taskDate: HTMLElement | null = headerArray[1];
-      taskDate.textContent = "Created on ALAS 5 WAA KA";
+      taskDate.textContent = `Task created at ${taskCreated}`
 
       const deleteSpan: HTMLSpanElement | null = spanArray[0];
       deleteSpan.classList.add("material-symbols-outlined");
@@ -145,6 +155,10 @@ const mutationTaskHandler = new MutationObserver((mutations) => {
   const taskClass: string = taskEl.classList[0];
 
   deleteButtonChildNode.addEventListener("click", () => {
+    taskNumber--
+    if(taskNumber === 0) {
+      taskHandler?.classList.remove("paddingAdd")
+    } 
     headerArrays.forEach((e) => {
       const divEl = document.getElementById(`${e}`);
       const divElString = divEl?.attributes[1].value as string;
@@ -167,8 +181,9 @@ const mutationTaskHandler = new MutationObserver((mutations) => {
           const taskValue: string | null = oldValue.textContent;
           if (editTask) {
             editTask.innerHTML = `
-                      <h1>Edit Task</h1>
+           
                         <div class="container">
+                          <h1>Edit Task</h1>
                           <input type="text" value="${taskValue}" id="wtf">
                           <button class="saveEdit">Save</button>
                           <button class="cancelEdit">Cancel</button>
